@@ -1,8 +1,10 @@
 package pl.edu.pjatk.pyatkway.pyatkway.models;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Ingredient {
+    private final UUID guid;
     private String name;
     private int calories;
     private int totalFat;
@@ -13,12 +15,14 @@ public class Ingredient {
     private int totalProtein;
     private List<Vitamin> vitamins;
 
-    public Ingredient(String name, int calories) {
+    public Ingredient(UUID guid, String name, int calories) {
+        this.guid = guid;
         this.name = name;
         this.calories = calories;
     }
 
-    public Ingredient(String name, int calories, int totalFat, int cholesterol, int sodium, int potassium, int totalCarbohydrate, int totalProtein, List<Vitamin> vitamins) {
+    public Ingredient(UUID guid, String name, int calories, int totalFat, int cholesterol, int sodium, int potassium, int totalCarbohydrate, int totalProtein, List<Vitamin> vitamins) {
+        this.guid = guid;
         this.name = name;
         this.calories = calories;
         this.totalFat = totalFat;
@@ -28,6 +32,10 @@ public class Ingredient {
         this.totalCarbohydrate = totalCarbohydrate;
         this.totalProtein = totalProtein;
         this.vitamins = vitamins;
+    }
+
+    public UUID getGuid() {
+        return guid;
     }
 
     public String getName() {
