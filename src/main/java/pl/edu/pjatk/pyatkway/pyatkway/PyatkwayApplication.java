@@ -8,7 +8,6 @@ public class PyatkwayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PyatkwayApplication.class, args);
-		System.out.println("Hello world");
 	}
 
 }
