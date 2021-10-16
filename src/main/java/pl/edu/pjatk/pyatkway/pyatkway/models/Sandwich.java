@@ -52,4 +52,14 @@ public class Sandwich {
 
         return caloriesTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "guid=" + guid +
+                ", name='" + name + '\'' +
+                ", ingredients=" + ingredients +
+                ", price=" + price +
+                '}';
+    }
 }
