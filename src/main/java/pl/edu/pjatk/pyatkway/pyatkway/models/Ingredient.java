@@ -42,10 +42,6 @@ public class Ingredient {
         return calories;
     }
 
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
     public int getTotalFat() {
         return totalFat;
     }

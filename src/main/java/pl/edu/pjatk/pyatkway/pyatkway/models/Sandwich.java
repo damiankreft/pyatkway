@@ -36,4 +36,11 @@ public class Sandwich {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public int getCalories() {
+        int caloriesTotal = 0;
+        for (var i : ingredients) {
+            caloriesTotal += i.getCalories();
+        }
+    }
 }
