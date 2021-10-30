@@ -17,8 +17,14 @@ public class SandwichController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Sandwich> GetSandwich() {
-        var sandwich = sandwichService.CreateSandwich();
+    public ResponseEntity<Sandwich> getSandwich() {
+        var sandwich = sandwichService.createSandwich();
+        return ResponseEntity.ok(sandwich);
+    }
+
+    @GetMapping("prepare")
+    public ResponseEntity<Sandwich> prepareSandwich() {
+        var sandwich = sandwichService.prepareSandwich("ultra_sandwich");
         return ResponseEntity.ok(sandwich);
     }
 }
