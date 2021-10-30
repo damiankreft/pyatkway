@@ -1,23 +1,32 @@
 package pl.edu.pjatk.pyatkway.pyatkway.models;
 
+import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
+@Entity
+@Table(name = "Sandwich")
 public class Sandwich {
-    private final UUID guid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
+    @OneToMany
     private List<Ingredient> ingredients;
     private double price;
-    
-    public Sandwich(UUID guid, String name, List<Ingredient> ingredients, double price) {
-        this.guid = guid;
+
+    public Sandwich() {
+
+    }
+
+    public Sandwich(int id, String name, List<Ingredient> ingredients, double price) {
+        this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.price = price;
     }
 
-    public UUID getGuid() {
-        return guid;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -56,7 +65,7 @@ public class Sandwich {
     @Override
     public String toString() {
         return "Sandwich{" +
-                "guid=" + guid +
+                "guid=" + id +
                 ", name='" + name + '\'' +
                 ", ingredients=" + ingredients +
                 ", price=" + price +

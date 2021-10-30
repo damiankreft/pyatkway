@@ -2,15 +2,19 @@ package pl.edu.pjatk.pyatkway.pyatkway.models;
 
 import pl.edu.pjatk.pyatkway.pyatkway.enums.Vitamins;
 
-import java.util.UUID;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Vitamins")
 public class Vitamin {
-    private UUID guid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private Vitamins type;
     private int amount;
     
-    public Vitamin(UUID guid, Vitamins type, int amount) {
-        this.guid = guid;
+    public Vitamin(int id, Vitamins type, int amount) {
+        this.id = id;
         this.type = type;
         this.amount = amount;
     }

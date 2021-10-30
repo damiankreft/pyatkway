@@ -1,9 +1,14 @@
 package pl.edu.pjatk.pyatkway.pyatkway.models;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "Ingredient")
 public class Ingredient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final UUID guid;
     private String name;
     private int calories;
@@ -13,6 +18,7 @@ public class Ingredient {
     private int potassium;
     private int totalCarbohydrate;
     private int totalProtein;
+    @OneToMany
     private List<Vitamin> vitamins;
 
     public Ingredient(UUID guid, String name, int calories) {

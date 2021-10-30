@@ -13,14 +13,14 @@ public class SandwichService {
     public Sandwich createSandwich() {
         Ingredient pork = new Ingredient(UUID.randomUUID(), "Pork", 100);
         Ingredient bread = new Ingredient(UUID.randomUUID(), "White bread", 100);
-        var sandwich = new Sandwich(UUID.randomUUID(), "Pork sandwich", List.of(pork, bread), 5.0d);
+        var sandwich = new Sandwich(0, "Pork sandwich", List.of(pork, bread), 5.0d);
 
         return sandwich;
     }
 
     public Sandwich prepareSandwich(String name) {
         Ingredient bread = new Ingredient(UUID.randomUUID(), "White bread", 100);
-        var sandwich = new Sandwich(UUID.randomUUID(), name, List.of(bread), 5.0d);
+        var sandwich = new Sandwich(0, name, List.of(bread), 5.0d);
 
         return sandwich;
     }
