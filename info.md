@@ -6,3 +6,8 @@ Co to jest @JpaRepository
 Jak stowrzyć @Repository  
 Jak zapisaywać do bazy danych  
 Jak odczytywać z bazy danych  
+
+Poczytac o Optional
+Poczytac o @PathVariable
+Poczytac o JpaRepository
+Przecwiczyc rozne zapytania z sandwichRepository
