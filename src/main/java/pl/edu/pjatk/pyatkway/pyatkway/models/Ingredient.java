@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final UUID guid;
+    private UUID guid;
     private String name;
     private int calories;
     private int totalFat;
@@ -20,6 +20,8 @@ public class Ingredient {
     private int totalProtein;
     @OneToMany
     private List<Vitamin> vitamins;
+
+    public Ingredient() { }
 
     public Ingredient(UUID guid, String name, int calories) {
         this.guid = guid;
