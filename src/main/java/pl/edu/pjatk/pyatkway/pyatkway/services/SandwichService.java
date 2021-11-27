@@ -26,9 +26,15 @@ public class SandwichService {
 
     public Sandwich prepareSandwich(String name) {
         Ingredient bread = new Ingredient(UUID.randomUUID(), "White bread", 100);
-        var sandwich = new Sandwich(0, name, new ArrayList<Ingredient>(), 5.0d);
-        repository.save(sandwich);
+        var sandwich = new Sandwich(0, name, new ArrayList(), 5.0d);
+        return repository.save(sandwich);
+    }
 
-        return sandwich;
+    public List<Sandwich> getTop5() {
+        return repository.findSandwichesByIdIsLessThan(5);
+    }
+
+    public List<Sandwich> getUltra() {
+        return repository.findSandwichesByNameContains("ultra_sandwich");
     }
 }

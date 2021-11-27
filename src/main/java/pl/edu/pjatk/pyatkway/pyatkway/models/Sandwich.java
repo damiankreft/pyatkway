@@ -1,5 +1,7 @@
 package pl.edu.pjatk.pyatkway.pyatkway.models;
 
+import org.hibernate.engine.spi.CascadeStyle;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class Sandwich {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
     private double price;
 

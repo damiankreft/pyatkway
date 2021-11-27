@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
 import pl.edu.pjatk.pyatkway.pyatkway.services.SandwichService;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
 @RequestMapping("/sandwich")
 public class SandwichController {
@@ -26,5 +29,18 @@ public class SandwichController {
     public ResponseEntity<Sandwich> prepareSandwich() {
         var sandwich = sandwichService.prepareSandwich("ultra_sandwich");
         return ResponseEntity.ok(sandwich);
+    }
+
+    @GetMapping("topfive")
+    public ResponseEntity<List<Sandwich>> top5() {
+        var top5 = sandwichService.getTop5();
+        var date = new LocalDate()
+        return ResponseEntity.ok(top5);
+    }
+
+    @GetMapping("ultra")
+    public ResponseEntity<List<Sandwich>> ultra() {
+        var ultra = sandwichService.getUltra();
+        return ResponseEntity.ok(ultra);
     }
 }

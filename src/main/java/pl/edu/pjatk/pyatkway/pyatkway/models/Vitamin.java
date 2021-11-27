@@ -19,6 +19,10 @@ public class Vitamin {
         this.amount = amount;
     }
 
+    public Vitamin() {
+
+    }
+
     public Vitamins getType() {
         return type;
     }
