@@ -34,7 +34,6 @@ public class SandwichController {
     @GetMapping("topfive")
     public ResponseEntity<List<Sandwich>> top5() {
         var top5 = sandwichService.getTop5();
-        var date = new LocalDate()
         return ResponseEntity.ok(top5);
     }
 

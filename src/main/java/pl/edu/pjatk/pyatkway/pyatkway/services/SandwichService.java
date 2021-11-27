@@ -17,16 +17,16 @@ public class SandwichService {
     }
 
     public Sandwich createSandwich() {
-        Ingredient pork = new Ingredient(UUID.randomUUID(), "Pork", 100);
-        Ingredient bread = new Ingredient(UUID.randomUUID(), "White bread", 100);
-        var sandwich = new Sandwich(0, "Pork sandwich", List.of(pork, bread), 5.0d);
+        var pork = createIngredient("Pork", 100);
+        var bread = createIngredient("White bread", 100);
 
-        return sandwich;
+        return createSandwich("Pork sandwich", 5.0d, List.of(pork, bread));
     }
 
     public Sandwich prepareSandwich(String name) {
-        Ingredient bread = new Ingredient(UUID.randomUUID(), "White bread", 100);
-        var sandwich = new Sandwich(0, name, new ArrayList(), 5.0d);
+        var bread = createIngredient("White bread", 100);
+        var sandwich = createSandwich("Just a BIG Sandwich", 5.0d, List.of(bread));
+
         return repository.save(sandwich);
     }
 
@@ -36,5 +36,74 @@ public class SandwichService {
 
     public List<Sandwich> getUltra() {
         return repository.findSandwichesByNameContains("ultra_sandwich");
+    }
+
+    public void addIngredient(Sandwich sandwich, Ingredient ingredient) {
+        var ingredients = sandwich.getIngredients();
+        if (ingredients != null && ingredient != null) {
+            ingredients.add(ingredient);
+        }
+    }
+
+    public Sandwich createSandwich(String name, double price, List<Ingredient> ingredients) {
+        return new Sandwich(0, name, ingredients, price);
+    }
+
+    public Ingredient createIngredient(String name, int calories) {
+        return new Ingredient(UUID.randomUUID(), name, calories);
+    }
+
+    public double getSandwichCalories(Sandwich sandwich) {
+        if (sandwich == null || sandwich.getIngredients() == null) {
+            throw new NullPointerException("Sandwich or ingredients list is null");
+        }
+
+        var calories = 0;
+
+        for (var i : sandwich.getIngredients()) {
+            if (i == null) {
+                throw new NullPointerException("Ingredient is null");
+            }
+
+            calories += i.getCalories();
+        }
+
+        return calories;
+    }
+
+    public void setSandwichName(Sandwich sandwich, String name) {
+        if (sandwich == null) {
+            throw new NullPointerException("Sandwich is null.");
+        }
+
+        sandwich.setName(name);
+    }
+
+    public void updateSandwichPrice(Sandwich sandwich, double price) {
+        if (sandwich == null) {
+            throw new NullPointerException("Sandwich is null.");
+        }
+
+        if (price >= 0.0d) {
+            sandwich.setPrice(price);
+        }
+    }
+
+    public String getIngredients(List<Ingredient> ingredients) {
+        var ingredientNames = "";
+
+        if (ingredients == null) {
+            throw new NullPointerException("Ingredients list is null.");
+        }
+        for (var i : ingredients) {
+            if (i == null) {
+                throw new NullPointerException("Ingredient is null");
+            }
+
+            ingredientNames += i.getName() + ", ";
+        }
+
+
+        return ingredientNames;
     }
 }
