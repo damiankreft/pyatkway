@@ -5,6 +5,7 @@ import pl.edu.pjatk.pyatkway.pyatkway.models.Ingredient;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
 import pl.edu.pjatk.pyatkway.pyatkway.repositories.SandwichRepository;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -89,20 +90,19 @@ public class SandwichService {
         }
     }
 
-    public String getIngredients(List<Ingredient> ingredients) {
-        var ingredientNames = "";
+    public List<String> getIngredients(List<Ingredient> ingredients) {
+        var ingredientNames = new ArrayList<String>();
 
         if (ingredients == null) {
             throw new NullPointerException("Ingredients list is null.");
         }
+
         for (var i : ingredients) {
             if (i == null) {
                 throw new NullPointerException("Ingredient is null");
             }
-
-            ingredientNames += i.getName() + ", ";
+            ingredientNames.add(i.getName());
         }
-
 
         return ingredientNames;
     }
