@@ -8,6 +8,7 @@ import pl.edu.pjatk.pyatkway.pyatkway.repositories.SandwichRepository;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -105,5 +106,27 @@ public class SandwichService {
         }
 
         return ingredientNames;
+    }
+
+    public Sandwich findById(int id) {
+        Optional<Sandwich> byId = repository.findById(id);
+        return byId.orElseThrow(RuntimeException::new);
+    }
+
+    public List<Sandwich> findAll() {
+        var all = repository.findAll();
+        return all;
+    }
+
+    public void deleteById(int id) {
+        repository.deleteById(id);
+    }
+
+    public void delete(Sandwich sandwich) {
+        repository.delete(sandwich);
+    }
+
+    public boolean existsById(int id) {
+        return repository.existsById(id);
     }
 }
