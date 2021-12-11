@@ -85,4 +85,18 @@ class SandwichServiceTest {
 
         Assertions.assertThat(result).isEqualTo(expectedCaloriesTotal);
     }
+
+    @Test
+    void adds_a_new_ingredient_to_an_existing_sandwich() {
+        var ingredients = new ArrayList<Ingredient>();
+        ingredients.add(new Ingredient(UUID.randomUUID(), "Bread", 100));
+        ingredients.add(new Ingredient(UUID.randomUUID(), "Lettuce", 40));
+        ingredients.add(new Ingredient(UUID.randomUUID(), "Tomato", 40));
+        var sandwich = new Sandwich(1, "", ingredients, 0d);
+        var newIngredient = new Ingredient(UUID.randomUUID(), "Banana", 100);
+
+        sandwichService.addIngredient(sandwich, newIngredient);
+
+        Assertions.assertThat(sandwich.getIngredients().contains(newIngredient));
+    }
 }
