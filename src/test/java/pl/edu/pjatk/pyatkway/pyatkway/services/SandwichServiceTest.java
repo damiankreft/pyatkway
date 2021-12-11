@@ -2,14 +2,30 @@ package pl.edu.pjatk.pyatkway.pyatkway.services;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Ingredient;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
+import pl.edu.pjatk.pyatkway.pyatkway.repositories.SandwichRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 class SandwichServiceTest {
-    private SandwichService sandwichService = new SandwichService(null);
+    @Mock
+    private SandwichRepository sandwichRepository;
+
+    @InjectMocks
+    private SandwichService sandwichService;
 
     @Test
     void set_sandwich_name_to_given_value() {
@@ -48,7 +64,7 @@ class SandwichServiceTest {
 
         var result = sandwichService.getIngredients(ingredients);
 
-        Assertions.assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -99,4 +115,39 @@ class SandwichServiceTest {
 
         Assertions.assertThat(sandwich.getIngredients().contains(newIngredient));
     }
+
+    @Test
+    void shouldFindById() {
+        int id = 1;
+        when(sandwichRepository.findById(any()))
+                .thenReturn(Optional.of(new Sandwich()));
+        var byId = sandwichService.findById(id);
+
+        assertThat(byId).isNotNull();
+    }
+
+    @Test
+    void shouldNotFindById() {
+        var id = 200;
+
+        when(sandwichRepository.findById(any())).thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(
+                RuntimeException.class
+        ).isThrownBy(() -> sandwichService.findById(id));
+    }
+
+    @Test
+    void shouldFindAll() {
+        var sandwiches = when(sandwichRepository.findAll())
+                .thenReturn(new ArrayList<Sandwich>());
+
+        sandwichService.findAll();
+
+        assertThat(sandwiches).isNotNull();
+    }
+
+    // deleteById
+    // delete
+    // existsById
 }
