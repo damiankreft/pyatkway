@@ -1,7 +1,5 @@
 package pl.edu.pjatk.pyatkway.pyatkway.models;
 
-import org.hibernate.engine.spi.CascadeStyle;
-
 import javax.persistence.*;
 import java.util.List;
 

@@ -5,19 +5,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Ingredient;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
 import pl.edu.pjatk.pyatkway.pyatkway.repositories.SandwichRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SandwichServiceTest {
@@ -54,9 +54,9 @@ class SandwichServiceTest {
     @Test
     void returns_names_of_all_ingredients_separated_by_coma() {
         var ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Bread", 100));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Lettuce", 40));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Tomato", 40));
+        ingredients.add(new Ingredient("Bread", 100));
+        ingredients.add(new Ingredient("Lettuce", 40));
+        ingredients.add(new Ingredient("Tomato", 40));
         var expected = new ArrayList();
         expected.add("Bread");
         expected.add("Lettuce");
@@ -91,9 +91,9 @@ class SandwichServiceTest {
     @Test
     void returns_the_sum_of_calories_of_sandwichs_ingredients() {
         var ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Bread", 100));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Lettuce", 40));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Tomato", 40));
+        ingredients.add(new Ingredient("Bread", 100));
+        ingredients.add(new Ingredient("Lettuce", 40));
+        ingredients.add(new Ingredient("Tomato", 40));
         var sandwich = new Sandwich(1, "", ingredients, 0d);
         var expectedCaloriesTotal = 180.0d;
 
@@ -105,11 +105,11 @@ class SandwichServiceTest {
     @Test
     void adds_a_new_ingredient_to_an_existing_sandwich() {
         var ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Bread", 100));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Lettuce", 40));
-        ingredients.add(new Ingredient(UUID.randomUUID(), "Tomato", 40));
+        ingredients.add(new Ingredient("Bread", 100));
+        ingredients.add(new Ingredient("Lettuce", 40));
+        ingredients.add(new Ingredient("Tomato", 40));
         var sandwich = new Sandwich(1, "", ingredients, 0d);
-        var newIngredient = new Ingredient(UUID.randomUUID(), "Banana", 100);
+        var newIngredient = new Ingredient("Banana", 100);
 
         sandwichService.addIngredient(sandwich, newIngredient);
 

@@ -2,14 +2,13 @@ package pl.edu.pjatk.pyatkway.pyatkway.models;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Ingredient")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID guid;
+    private int id;
     private String name;
     private int calories;
     private int totalFat;
@@ -18,19 +17,17 @@ public class Ingredient {
     private int potassium;
     private int totalCarbohydrate;
     private int totalProtein;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Vitamin> vitamins;
 
     public Ingredient() { }
 
-    public Ingredient(UUID guid, String name, int calories) {
-        this.guid = guid;
+    public Ingredient(String name, int calories) {
         this.name = name;
         this.calories = calories;
     }
 
-    public Ingredient(UUID guid, String name, int calories, int totalFat, int cholesterol, int sodium, int potassium, int totalCarbohydrate, int totalProtein, List<Vitamin> vitamins) {
-        this.guid = guid;
+    public Ingredient(String name, int calories, int totalFat, int cholesterol, int sodium, int potassium, int totalCarbohydrate, int totalProtein, List<Vitamin> vitamins) {
         this.name = name;
         this.calories = calories;
         this.totalFat = totalFat;
@@ -42,8 +39,8 @@ public class Ingredient {
         this.vitamins = vitamins;
     }
 
-    public UUID getGuid() {
-        return guid;
+    public int getId() {
+        return id;
     }
 
     public String getName() {

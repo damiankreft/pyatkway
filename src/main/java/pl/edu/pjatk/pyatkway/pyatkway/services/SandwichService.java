@@ -5,11 +5,9 @@ import pl.edu.pjatk.pyatkway.pyatkway.models.Ingredient;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
 import pl.edu.pjatk.pyatkway.pyatkway.repositories.SandwichRepository;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class SandwichService {
@@ -23,6 +21,10 @@ public class SandwichService {
         var bread = createIngredient("White bread", 100);
 
         return createSandwich("Pork sandwich", 5.0d, List.of(pork, bread));
+    }
+
+    public Sandwich addSandwich(Sandwich sandwich) {
+        return repository.save(sandwich);
     }
 
     public Sandwich prepareSandwich(String name) {
@@ -52,7 +54,7 @@ public class SandwichService {
     }
 
     public Ingredient createIngredient(String name, int calories) {
-        return new Ingredient(UUID.randomUUID(), name, calories);
+        return new Ingredient(name, calories);
     }
 
     public double getSandwichCalories(Sandwich sandwich) {

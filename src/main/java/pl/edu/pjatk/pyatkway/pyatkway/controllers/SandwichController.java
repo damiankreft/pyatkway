@@ -1,13 +1,10 @@
 package pl.edu.pjatk.pyatkway.pyatkway.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pjatk.pyatkway.pyatkway.models.Sandwich;
 import pl.edu.pjatk.pyatkway.pyatkway.services.SandwichService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,15 +16,20 @@ public class SandwichController {
         this.sandwichService = sandwichService;
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<String> helloWorld() {
+        return ResponseEntity.ok("Hello, world!");
+    }
+
     @GetMapping("")
     public ResponseEntity<Sandwich> getSandwich() {
         var sandwich = sandwichService.createSandwich();
         return ResponseEntity.ok(sandwich);
     }
 
-    @GetMapping("prepare")
-    public ResponseEntity<Sandwich> prepareSandwich() {
-        var sandwich = sandwichService.prepareSandwich("ultra_sandwich");
+    @GetMapping("/prepare")
+    public ResponseEntity<Sandwich> prepareSandwich(@RequestParam String sandwichName) {
+        var sandwich = sandwichService.prepareSandwich(sandwichName);
         return ResponseEntity.ok(sandwich);
     }
 
@@ -41,5 +43,10 @@ public class SandwichController {
     public ResponseEntity<List<Sandwich>> ultra() {
         var ultra = sandwichService.getUltra();
         return ResponseEntity.ok(ultra);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Sandwich> findById(@PathVariable int id) {
+        return ResponseEntity.ok(sandwichService.findById(id));
     }
 }
