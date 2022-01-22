@@ -49,4 +49,9 @@ public class SandwichController {
     public ResponseEntity<Sandwich> findById(@PathVariable int id) {
         return ResponseEntity.ok(sandwichService.findById(id));
     }
+
+    @PostMapping()
+    public ResponseEntity<Sandwich> addSandwich(@RequestBody Sandwich sandwich) {
+        return ResponseEntity.ok(sandwichService.addSandwich(sandwich));
+    }
 }
